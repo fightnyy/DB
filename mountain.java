@@ -1,5 +1,3 @@
-package GoodHiking;
-
 public class mountain {
 	String mntnm; //산이름
 	String mnheight; //산 높이 

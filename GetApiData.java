@@ -1,4 +1,3 @@
-package GoodHiking;
 import java.net.URL;
 
 
@@ -16,6 +15,7 @@ import org.w3c.dom.NodeList;
 public class GetApiData {
 	static ArrayList<mountain> mountain = new ArrayList<>();
 	static ArrayList<mSurroundings> mSurroundings = new ArrayList<>();
+
 
 	public static String getTagValue(String tag, Element eElement) {
 	    NodeList nlList = eElement.getElementsByTagName(tag).item(0).getChildNodes();

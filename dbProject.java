@@ -1,4 +1,3 @@
-package GoodHiking;
 import java.sql.*;
 
 
@@ -44,6 +43,14 @@ public class dbProject {
 
 	
 	public static void main(String[] args) throws  SQLException{
+
+		/*
+		각자 자기 환경에 맞게 세팅해주면 됨
+		 */
+		String url = "jdbc:postgresql://localhost/goodHiking";
+		String userId = "fbduddn97";
+		String password= "1357";
+
 		Connection conn = null;
 		Statement stmt = null; 
 		PreparedStatement pstm = null;
@@ -52,20 +59,22 @@ public class dbProject {
 		GetApiData.getApiData();
 		ArrayList<mountain> mt=GetApiData.mountain;
 		ArrayList<mSurroundings> ms=GetApiData.mSurroundings;
+		ArrayList<Weather> wt = WeatherAPI.mweather;
 		
 	  try {
 		  scan = new Scanner(System.in);
 		  
 		  //connection 
 		  System.out.println("Connection PostgreSQL database");
-		  conn = DriverManager.getConnection("jdbc:postgresql://localhost/goodHiking", "fbduddn97","1357");
+		  conn = DriverManager.getConnection(url, userId,password);
 		  System.out.println("Success Connection");
 		  stmt = conn.createStatement();
 		  
 		  
 		  stmt.executeUpdate("drop Table Mountain");
 		  stmt.executeUpdate("drop Table mSurroundings");
-		  //stmt.executeUpdate("drop Table Weather");
+		  stmt.executeUpdate("drop Table mWeather");
+
 			  
 		 
 		  //create table
@@ -73,7 +82,7 @@ public class dbProject {
 			  
 		  stmt.executeUpdate("create table Mountain (mntnm varchar(20),mnheight varchar(20),areanm varchar(100),aeatreason varchar(400))");
 		  stmt.executeUpdate("create table mSurroundings (mntnm varchar(20),tourisminf varchar(800),etccourse varchar(800))");
-		  //stmt.executeUpdate("create table Weather()"); 
+		  stmt.executeUpdate("create table Weather(mntnm varchar(20) )");
 		  
 		 
 
