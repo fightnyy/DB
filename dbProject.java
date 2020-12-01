@@ -59,7 +59,7 @@ public class dbProject {
 		GetApiData.getApiData();
 		ArrayList<mountain> mt=GetApiData.mountain;
 		ArrayList<mSurroundings> ms=GetApiData.mSurroundings;
-		ArrayList<Weather> wt = WeatherAPI.mweather;
+//		ArrayList<Weather> wt = WeatherAPI.mweather;
 		
 	  try {
 		  scan = new Scanner(System.in);
@@ -82,9 +82,8 @@ public class dbProject {
 			  
 		  stmt.executeUpdate("create table Mountain (mntnm varchar(20),mnheight varchar(20),areanm varchar(100),aeatreason varchar(400))");
 		  stmt.executeUpdate("create table mSurroundings (mntnm varchar(20),tourisminf varchar(800),etccourse varchar(800))");
-		  stmt.executeUpdate("create table Weather(mntnm varchar(20) )");
-		  
-		 
+		  stmt.executeUpdate("create table Weather(mntnm varchar(20),wns varchar(10), tmp varchar(10), rainfall varchar(10))");
+
 
 		  for(int i=0;i<113 ;i++) {
 			  String name=mt.get(i).mntnm; //산 이름 
