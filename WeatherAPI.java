@@ -10,10 +10,12 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class WeatherAPI {
 
+    static ArrayList<Weather> weathers = new ArrayList<>();
     static int i = 1890;
 
     private static String getTagValue(String tag, Element eElement) {
@@ -30,7 +32,7 @@ public class WeatherAPI {
     }
 
 
-    public static void main(String[] args) {
+    public static void GetWeatherAPI() {
         try {
 
             while (true) {
@@ -62,16 +64,17 @@ public class WeatherAPI {
                 for (int temp = 0; temp < nList.getLength(); temp++) {
                     Node nNode = nList.item(temp);
                     if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-
+                        Weather wt = null;
                         Element eElement = (Element) nNode;
 
                         System.out.println("eElement : " + eElement.toString());
-
-                        System.out.println("산이름  : " + getTagValue("obsname", eElement));
-                        System.out.println("산날씨  : " + getTagValue("tm10m", eElement));
-                        System.out.println("풍속 : " + getTagValue("ws10m", eElement));
-                        System.out.println("강수량  : " + getTagValue("rn", eElement));
-                    }    // for end
+                        wt = new Weather(getTagValue("obsname", eElement) , getTagValue("tm10m", eElement) , getTagValue("ws10m", eElement) ,  getTagValue("rn", eElement));
+                        weathers.add(wt);
+//                        System.out.println("산이름  : " + getTagValue("obsname", eElement));
+//                        System.out.println("산날씨  : " + getTagValue("tm10m", eElement));
+//                        System.out.println("풍속 : " + getTagValue("ws10m", eElement));
+//                        System.out.println("강수량  : " + getTagValue("rn", eElement));
+                    }
                 }
 
                 if (i>9914)
