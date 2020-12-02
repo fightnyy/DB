@@ -17,19 +17,16 @@ public class WeatherAPI {
     static int i = 1890;
 
     private static String getTagValue(String tag, Element eElement) {
-        System.out.println("여기냐" + eElement.getElementsByTagName(tag).item(0).toString());
-        NodeList nlList = eElement.getElementsByTagName(tag).item(0).getChildNodes();
-        System.out.println("여기냐1");
-        Node nValue = (Node) nlList.item(0);
-        System.out.println("여기냐2");
-        System.out.println("nValue" + nValue);
-        System.out.println("nValue.getnode" + nValue.getNodeValue());
-        if (nValue == null) {
-            System.out.println("들어왔다");
-            return null;
-        }
+        if (eElement.getElementsByTagName(tag).getLength()>0) {
+            NodeList nlList = eElement.getElementsByTagName(tag).item(0).getChildNodes();
+            Node nValue = (Node) nlList.item(0);
+            if (nValue == null) {
+                return null;
+            }
 
-        return nValue.getNodeValue();
+            return nValue.getNodeValue();
+        }else
+            return null;
     }
 
 
@@ -61,7 +58,7 @@ public class WeatherAPI {
 
                 // 파싱할 tag
                 NodeList nList = doc.getElementsByTagName("outputData");
-                System.out.println("여기였냐!");
+
                 for (int temp = 0; temp < nList.getLength(); temp++) {
                     Node nNode = nList.item(temp);
                     if (nNode.getNodeType() == Node.ELEMENT_NODE) {
@@ -70,8 +67,6 @@ public class WeatherAPI {
 
                         System.out.println("eElement : " + eElement.toString());
 
-                        System.out.println("######################");
-                        //System.out.println(eElement.getTextContent());
                         System.out.println("산이름  : " + getTagValue("obsname", eElement));
                         System.out.println("산날씨  : " + getTagValue("tm10m", eElement));
                         System.out.println("풍속 : " + getTagValue("ws10m", eElement));
