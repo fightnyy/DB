@@ -1,16 +1,16 @@
+package GoodHiking;
+
 public class mountain {
 	String mntnm; //산이름
 	String mnheight; //산 높이 
-	String areanm;// 소재
-	String aeatreason;//100대 명산 선정 이유 
+	String areanm;// 소재지 
+
 	
-	public mountain(String mntnm, String mnheight, String areanm, String aeatreason) 
+	public mountain(String mntnm, String mnheight, String areanm) 
 	{
 		this.mntnm=mntnm;
 		this.mnheight=mnheight;
-		this.areanm=areanm;
-		this.aeatreason=aeatreason;
-		
+		this.areanm=areanm;		
 	}
 
 

@@ -1,3 +1,4 @@
+package GoodHiking;
 import java.net.URL;
 
 
@@ -14,8 +15,8 @@ import org.w3c.dom.NodeList;
 
 public class GetApiData {
 	static ArrayList<mountain> mountain = new ArrayList<>();
+	static ArrayList<topHundred> topHundred = new ArrayList<>();
 	static ArrayList<mSurroundings> mSurroundings = new ArrayList<>();
-
 
 	public static String getTagValue(String tag, Element eElement) {
 	    NodeList nlList = eElement.getElementsByTagName(tag).item(0).getChildNodes();
@@ -56,10 +57,12 @@ public class GetApiData {
 					for(int temp = 0; temp < nList.getLength(); temp++){
 						Node nNode = nList.item(temp);
 						mountain mt=null;
+						topHundred th=null;
 						mSurroundings ms=null;
 						if(nNode.getNodeType() == Node.ELEMENT_NODE){
 							Element eElement = (Element) nNode;
-							mt=new mountain(getTagValue("mntnm",eElement),getTagValue("mntheight",eElement),getTagValue("areanm",eElement),getTagValue("aeatreason",eElement));
+							mt=new mountain(getTagValue("mntnm",eElement),getTagValue("mntheight",eElement),getTagValue("areanm",eElement));
+							th=new topHundred(getTagValue("mntnm",eElement),getTagValue("aeatreason",eElement));
 							ms=new mSurroundings(getTagValue("mntnm",eElement),getTagValue("tourisminf",eElement), getTagValue("etccourse",eElement));
 							/*
 							System.out.println("산 이름 :"+ getTagValue("mntnm",eElement));
@@ -73,6 +76,7 @@ public class GetApiData {
 							*/
 
 							mountain.add(mt);
+							topHundred.add(th);
 							mSurroundings.add(ms);
 							
 							
